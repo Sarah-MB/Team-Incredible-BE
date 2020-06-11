@@ -25,12 +25,15 @@ describe('POST /login', () => {
   });
 
   //sample correct JSON data which is in database
-  it('should respond 200', (done) => {
-    request(app)
-      .post('/api/v1/login')
-      .send({ username: 'team.incredible@gmail.com', password: 'Incredible' })
-      .expect(200);
-
+  describe('Signing in with a verified email and password', ()=>{
+    it('should respond 200', (done)=>{
+      request.agent(app)
+          .post('/login')
+          .send({username:'boyroberto@gmail.com',password:'emirateboy'})
+          .expect(200)
+          .expect('message', 'Success')
+          done();
+    });
   });
   //sample incorrect JSON data which is not in database
   it('should respond with 404', (done) => {
